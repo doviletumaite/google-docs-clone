@@ -57,6 +57,7 @@ export default function TextEditor() {
           quill.off("text-change",handler )
       }
     }, [socket, quill])
+    
     useEffect(() => {
         setSocket(io("http://localhost:3001")) 
         return () => {
@@ -84,6 +85,16 @@ export default function TextEditor() {
        })
        socket.emit("get-document", documentId)
     }, [socket, quill, documentId])
+
+    useEffect(() => {
+      if (socket == null || quill == null ) return
+      const interval = setInterval(()=>{
+        socket.emit("save-document", quill.getContest())
+      }, 2000)
+      return () => {
+        clearInterval(interval)
+      }
+  }, [socket, quill])
 
   return(
       <div className="container" ref={wrapperRef}>
