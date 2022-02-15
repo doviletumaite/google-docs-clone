@@ -89,7 +89,7 @@ export default function TextEditor() {
     useEffect(() => {
       if (socket == null || quill == null ) return
       const interval = setInterval(()=>{
-        socket.emit("save-document", quill.getContest())
+        socket.emit("save-document", quill.getContents())
       }, 2000)
       return () => {
         clearInterval(interval)
