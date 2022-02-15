@@ -1,6 +1,8 @@
 const Login = () => {
     return (
-        <div></div>
+        <div>
+            <button>Login</button>
+        </div>
     )
 }
 export default Login
